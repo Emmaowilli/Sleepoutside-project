@@ -1,15 +1,14 @@
-function convertToJson(response) {
-  if (!response.ok) {
+function convertToJson(res) {
+  if (!res.ok) {
     throw new Error("Bad Response");
   }
-  return response.json();
+  return res.json();
 }
 
 export default class ProductData {
   constructor(category) {
     this.category = category;
-    // relative path that works from index, product pages, and cart
-    this.path = "../json/" + this.category + ".json";
+    this.path = `/json/${this.category}.json`;
   }
 
   async getData() {
@@ -22,3 +21,4 @@ export default class ProductData {
     return products.find((item) => item.Id === id);
   }
 }
+

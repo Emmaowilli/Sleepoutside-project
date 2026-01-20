@@ -11,8 +11,11 @@ async function renderProductList() {
     .map(
       (product) => `
       <li class="product-card">
-        <a href="product_pages/northface-talus-4.html">
-          <img src="${product.Image}" alt="${product.NameWithoutBrand}">
+        <a href="src/index.html?category=tents&id=${product.Id}">
+          <img 
+            src="${product.Image}" 
+            alt="${product.NameWithoutBrand}"
+          />
           <h3>${product.Brand?.Name ?? ""}</h3>
           <h2>${product.NameWithoutBrand}</h2>
           <p class="product-card__price">$${product.FinalPrice}</p>
@@ -24,3 +27,7 @@ async function renderProductList() {
 }
 
 renderProductList();
+
+
+
+

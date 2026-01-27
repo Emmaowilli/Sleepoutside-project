@@ -1,18 +1,19 @@
 import ProductData from "../js/ProductData.mjs";
 
-// Run only after HTML is fully loaded
+// Wait for DOM to be ready (important for production)
 document.addEventListener("DOMContentLoaded", () => {
   // Get category from URL (?category=tents)
   const params = new URLSearchParams(window.location.search);
   const selectedCategory = params.get("category") || "tents";
 
   // Create data source
+  // ProductData internally must use: `/json/${category}.json`
   const dataSource = new ProductData(selectedCategory);
 
-  // Get product list container
+  // Product list container
   const productList = document.querySelector(".product-list");
 
-  // If container does not exist, stop execution (no console usage)
+  // Stop silently if container is missing (no console usage)
   if (!productList) {
     return;
   }
@@ -33,11 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Product card template
   function productCardTemplate(product) {
-    // Normalize image path for Netlify / Render
+    // Ensure image path works in production
     const imagePath =
-      product.Image && product.Image.startsWith("http")
+      product.Image && product.Image.startsWith("/")
         ? product.Image
-        : `.${product.Image}`;
+        : `/${product.Image}`;
 
     return `
       <li class="product-card">

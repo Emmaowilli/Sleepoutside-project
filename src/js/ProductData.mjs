@@ -1,24 +1,18 @@
-function convertToJson(res) {
-  if (!res.ok) {
-    throw new Error("Bad Response");
-  }
-  return res.json();
-}
-
 export default class ProductData {
   constructor(category) {
     this.category = category;
-    this.path = `/json/${this.category}.json`;
+    this.dataSource = `/json/${category}.json`; // ✅ ROOT-ABSOLUTE
   }
 
   async getData() {
-    const response = await fetch(this.path);
-    return convertToJson(response);
-  }
+    const response = await fetch(this.dataSource);
 
-  async findProductById(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    if (!response.ok) {
+      throw new Error("Data could not be loaded");
+    }
+
+    return response.json();
   }
 }
+
 

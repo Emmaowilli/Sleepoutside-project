@@ -4,13 +4,19 @@ async function loadTemplate(selector, path) {
     return;
   }
 
-  const response = await fetch(path);
-  if (!response.ok) {
-    return;
-  }
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      console.warn(`Failed to load template: ${path} (${response.status})`);
+      return;
+    }
 
-  element.innerHTML = await response.text();
+    element.innerHTML = await response.text();
+  } catch (err) {
+    console.error("Template load error:", err);
+  }
 }
 
-loadTemplate("header", "../partials/header.html");
-loadTemplate("footer", "../partials/footer.html");
+// Use root-absolute paths (critical for subfolder pages)
+loadTemplate("header", "/partials/header.html");
+loadTemplate("footer", "/partials/footer.html");

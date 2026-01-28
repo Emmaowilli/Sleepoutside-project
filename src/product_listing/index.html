@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Products</title>
 
-    <!-- IMPORTANT: relative path (vite root = src) -->
+    <!-- Use root-absolute path (Vite/Netlify serves from site root) -->
     <link rel="stylesheet" href="/css/style.css" />
-    <!-- JS -->
-    <script src="../js/product-listing.js" type="module"></script>
+
+    <!-- Use root-absolute path for your script -->
+    <script src="/js/product-listing.js" type="module" defer></script>
+
+    <!-- If main.js is needed here for header/footer injection, add it -->
+    <script src="/js/main.js" type="module" defer></script>
   </head>
 
   <body>
+    <!-- Header will be replaced/injected by main.js if you use placeholders -->
+    <!-- If you prefer to keep static header for now, change img and links to root-absolute: -->
     <header class="divider">
       <div class="logo">
-        <img src="../images/noun_Tent_2517.svg" alt="tent logo" />
-        <a href="../index.html">
+        <!-- Root-absolute image path -->
+        <img src="/images/noun_Tent_2517.svg" alt="tent logo" />
+        <a href="/index.html">
           Sleep<span class="highlight">Outside</span>
         </a>
       </div>
 
       <div class="cart">
-        <a href="../cart/index.html">Cart</a>
+        <a href="/cart/index.html">Cart</a>
       </div>
     </header>
 

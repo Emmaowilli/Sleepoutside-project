@@ -5,25 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkout | Sleep Outside</title>
 
-    <!-- Correct CSS path -->
-    <link rel="stylesheet" href="../css/style.css" />
+    <!-- Use root-relative paths – safest for both local + deployed -->
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
 
   <body>
-    <header></header>
+    <header class="divider">
+      <div class="logo">
+        <img src="/images/noun_Tent_2517.svg" alt="tent logo" />
+        <a href="/index.html">
+          Sleep<span class="highlight">Outside</span>
+        </a>
+      </div>
+    </header>
 
     <main class="divider">
       <section class="products">
         <h2>Review & Place Your Order</h2>
+
+        <!-- MINIMAL checkout form -->
+        <form id="checkout-form">
+          <label>
+            Full Name
+            <input type="text" name="fullName" required />
+          </label>
+
+          <label>
+            Address
+            <input type="text" name="address" required />
+          </label>
+
+          <label>
+            Credit Card
+            <input type="text" name="creditCard" required />
+          </label>
+
+          <button type="button" id="checkoutSubmit">Place Order</button>
+        </form>
       </section>
     </main>
 
-    <footer></footer>
+    <footer>
+      ©2025 ⛺ SleepOutside ⛺ WDD 330
+    </footer>
 
-    <!-- Correct JS paths (ONLY ONCE) -->
-    <script type="module" src="../js/main.js"></script>
-    <!-- Only include this if checkout actually needs product list logic -->
-    <!-- <script type="module" src="../js/product-list.js"></script> -->
+    <!-- global JS (if you have shared logic like cart count in header etc.) -->
+    <script type="module" src="/js/main.js"></script>
+    <!-- checkout logic -->
+    <script type="module" src="/js/checkout.js"></script>
   </body>
 </html>
+
 

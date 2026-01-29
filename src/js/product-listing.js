@@ -38,10 +38,13 @@ function renderProductList() {
 
 // product card template
 function productCardTemplate(product) {
+  // IMPORTANT: Use /images/... root path + assume JSON Image is like "tents/filename.jpg"
+  // If your JSON has full path like "images/tents/...", change to "/${product.Image}"
+  // If JSON has only filename like "filename.jpg", change to `/images/${product.Image}`
   return `
     <li class="product-card">
-      <a href="../product/index.html?id=${product.Id}">
-        <img src="${product.Image}" alt="${product.Name}" />
+      <a href="/product/index.html?id=${product.Id}">
+        <img src="/images/${product.Image}" alt="${product.Name}" />
         <h3 class="card__brand">${product.Brand?.Name || ""}</h3>
         <h2 class="card__name">${product.NameWithoutBrand}</h2>
         <p class="product-card__price">$${product.FinalPrice}</p>

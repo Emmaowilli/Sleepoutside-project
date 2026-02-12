@@ -1,4 +1,74 @@
-<link rel="stylesheet" href="../css/style.css" />
-<script src="../js/product.js" type="module"></script>
-<script src="../js/main.js" type="module"></script>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sleep Outside | Products</title>
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/main.js" type="module"></script>
+</head>
+
+<body>
+  <header class="divider">
+    <div class="logo">
+      <img src="/images/noun_Tent_2517.svg" alt="tent logo" />
+      <a href="../index.html">Sleep<span class="highlight">Outside</span></a>
+    </div>
+  </header>
+
+  <main class="divider">
+    <h1 id="category-title">Products</h1>
+
+    <ul class="product-list" id="product-list"></ul>
+  </main>
+
+  <footer>
+    &copy;2025 ⛺ SleepOutside ⛺ WDD 330
+  </footer>
+
+  <!-- Page logic -->
+  <script type="module">
+    const listElement = document.getElementById("product-list");
+    const titleElement = document.getElementById("category-title");
+
+    function getCategoryFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("category");
+    }
+
+    async function loadProducts() {
+      const category = getCategoryFromURL();
+
+      if (!category) return;
+
+      titleElement.textContent =
+        category.replace("-", " ").toUpperCase();
+
+      try {
+        const response = await fetch(`/products/search/${category}`);
+        const products = await response.json();
+
+        listElement.innerHTML = products
+          .map(
+            (product) => `
+          <li class="product-card">
+            <img src="${product.Image}" alt="${product.Name}" />
+            <h3 class="card__brand">${product.Brand.Name}</h3>
+            <h2 class="card__name">${product.Name}</h2>
+            <p class="product-card__price">$${product.FinalPrice}</p>
+          </li>
+        `
+          )
+          .join("");
+      } catch (err) {
+        console.error("Error loading products:", err);
+      }
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>
+
 

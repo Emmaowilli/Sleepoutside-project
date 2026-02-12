@@ -5,27 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Cart</title>
 
-    <!-- Global CSS (go up one level) -->
+    <!-- Use root-relative paths – this fixes most 404s on Netlify -->
     <link rel="stylesheet" href="../css/style.css" />
 
-    <!-- Global JS -->
-    <script src="../js/main.js" type="module" defer></script>
+    <!-- Global JS – load early so header/footer can be injected -->
+    <script src="../js/main.js" type="module"></script>
+
+    <!-- Optional: cart-specific JS if you have separate cart logic -->
+    <!-- <script type="module" src="/js/cart.js" defer></script> -->
   </head>
 
   <body>
-    <!-- Header injected by main.js -->
+    <!-- Header will be injected here by main.js -->
     <header></header>
 
     <main class="divider">
       <section class="products">
-        <h2>Review &amp; Place Your Order</h2>
+        <h2>Your Cart</h2>
 
-        <!-- Cart items will render here later -->
+        <!-- Cart items will be rendered here by JS -->
         <ul class="product-list"></ul>
+
+        <!-- Empty cart fallback (shown if no items) -->
+        <div id="empty-cart-message" style="text-align: center; margin: 2rem 0; display: none;">
+          <p>Your cart is empty.</p>
+          <a href="src/index.html" class="button">Continue Shopping</a>
+        </div>
+
+        <!-- Cart summary / checkout button – shown only if items exist -->
+        <div id="cart-summary" style="display: none; margin-top: 1.5rem;">
+          <p class="cart-total">
+            Subtotal: $<span id="cart-total">0.00</span>
+          </p>
+          <a href="/checkout/index.html" class="button full-width">Proceed to Checkout</a>
+        </div>
       </section>
     </main>
 
-    <!-- Footer injected by main.js -->
+    <!-- Footer will be injected here by main.js -->
     <footer></footer>
   </body>
 </html>
